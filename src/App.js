@@ -1,26 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Admin, Resource, EditGuesser, ShowGuesser} from 'react-admin';
+import offers from './components/offers';
+import { MyLayout } from './layout';
+import jsonServerProvider from 'ra-data-json-server';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const dataProvider = jsonServerProvider('http://localhost:3000');
+const App = () => (
+	<Admin dataProvider={dataProvider} layout={MyLayout}>
+		<Resource name="offers" options={{ label: 'All Offers' }} {...offers}/>
+	</Admin>
+);
 
 export default App;
